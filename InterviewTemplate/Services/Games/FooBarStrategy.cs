@@ -27,7 +27,7 @@ namespace InterviewTemplate.Services.Games
     {
         public bool ExectuteStrategy(FooBar fooBar)
         {
-            return (fooBar.Position % 3 == 0) && (fooBar.Position % 5 == 0);
+            return (fooBar.Position % 3 == 0) || (fooBar.Position % 5 == 0);
         }
     }
 
