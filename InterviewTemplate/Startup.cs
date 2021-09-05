@@ -1,3 +1,4 @@
+using InterviewTemplate.Services.Games;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,9 @@ namespace InterviewTemplate
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InterviewTemplate", Version = "v1" });
             });
+
+            services.AddScoped<IFooBarGameService, FooBarService>();
+            services.AddScoped<IFooBarExecutionFactory, FooBarExecutionFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

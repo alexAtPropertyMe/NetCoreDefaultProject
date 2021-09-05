@@ -38,7 +38,7 @@ namespace InterviewTemplate.Controllers
             .ToArray();
         }
 
-        [HttpGet]
+        [HttpGet("FooBar")]
         public IActionResult Get(int position, string answer)
         {
             return _fooBarGameService.ExecuteGame(new Domain.Games.FooBar { 
