@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InterviewTemplate.Services.Games;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace InterviewTemplate.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IFooBarGameService _fooBarGameService;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IFooBarGameService fooBarGameService)
         {
             _logger = logger;
+            _fooBarGameService = fooBarGameService;
         }
 
         [HttpGet]
@@ -33,6 +36,15 @@ namespace InterviewTemplate.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet]
+        public IActionResult Get(int position, string answer)
+        {
+            return _fooBarGameService.ExecuteGame(new Domain.Games.FooBar { 
+                Position = position,
+                Answer = answer
+            }) ? Ok() : BadRequest();
         }
     }
 }
